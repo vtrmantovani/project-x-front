@@ -26,7 +26,43 @@ class TestModelWebsite(BaseTestCase):
     def test_validate_password(self):
 
         with self.assertRaisesRegexp(ValueError, "Password is required"):
-            user = User(email="vtrmantovani@gmail.com", password="")
+            User(email="vtrmantovani@gmail.com", password="")
 
         user = User(email="vtrmantovani@gmail.com", password="123456")
         self.assertIsNotNone(user.password)
+
+    def test_check_password(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        self.assertTrue(user.check_password("123456"))
+
+    def test_check_password_false_case(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        self.assertFalse(user.check_password("xpto"))
+
+    def test_is_authenticated(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        self.assertFalse(user.is_authenticated())
+
+    def test_is_active(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        with self.assertRaises(AttributeError):
+            self.assertFalse(user.is_active())
+
+    def test_is_anonymous(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        self.assertTrue(user.is_anonymous())
+
+    def test_get_id(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        self.assertEquals(user.get_id(), None)
+
+    def test_reload(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        user.enabled = True
+        db.session.add(user)
+        db.session.commit()
+        user.reload()
+
+    def test_load_user(self):
+        user = User(email="vtrmantovani@gmail.com", password="123456")
+        user.load_user(1)

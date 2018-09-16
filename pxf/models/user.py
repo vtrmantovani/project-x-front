@@ -4,7 +4,7 @@ import re
 from flask import current_app as app
 from sqlalchemy.orm import validates
 
-from pxf import db
+from pxf import db, login_manager
 
 rx_email = re.compile('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$')
 
@@ -37,3 +37,27 @@ class User(db.Model):
         if value:
             return app.argon2.generate_password_hash(value)
         raise ValueError('Password is required')
+
+    def check_password(self, password):
+        return app.argon2.check_password_hash(self.password, password)
+
+    # Flask-Login integration
+    def is_authenticated(self):
+        return self.id is not None
+
+    def is_active(self):
+        return self.active
+
+    def is_anonymous(self):
+        return self.id is None
+
+    def get_id(self):
+        return self.id
+
+    def reload(self):
+        User.query.get(self.id)
+
+    @staticmethod
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(user_id)
