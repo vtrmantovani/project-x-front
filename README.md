@@ -29,6 +29,12 @@ This project is the frontend for project-x-api
 make run
 ```
 
+### Create user
+
+```
+./manager.py create_user -e vtrmantovani@gmail.com -p 123456
+```
+
 
 ## Run the tests
 
