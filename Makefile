@@ -18,7 +18,7 @@ clean:
 	pip install -r requirements-dev.txt
 
  run:
-	FLASK_ENV=development flask run --reload
+	FLASK_ENV=development flask run  --port=8000 --reload
 
  lint: flake8 check-python-import
 

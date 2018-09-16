@@ -1,0 +1,21 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Authorization: [PXaLogin apikey="test.DU4jJQ.o8vOA378DsITlFQx1etXqt3c-8Q"]
+      Connection: [keep-alive]
+      User-Agent: [python-requests/2.19.1]
+    method: GET
+    uri: http://127.0.0.1:5000/api/website/1
+  response:
+    body: {string: "{\n  \"urls\": [\n    \"https://github.com/vtrmantovani\", \n\
+        \    \"https://www.linkedin.com/in/vtrmantovani\"\n  ]\n}\n"}
+    headers:
+      Content-Length: ['107']
+      Content-Type: [application/json]
+      Date: ['Sun, 16 Sep 2018 21:02:18 GMT']
+      Server: [Werkzeug/0.14.1 Python/3.6.5]
+    status: {code: 200, message: OK}
+version: 1

@@ -1,9 +1,11 @@
 import unittest
 
+from vcr_unittest import VCRTestCase
+
 from pxf import create_app, db
 
 
-class BaseTestCase(unittest.TestCase):
+class BaseTestCase(VCRTestCase, unittest.TestCase):
 
     def create_app(self):
         app = create_app('Testing')

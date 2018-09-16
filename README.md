@@ -23,7 +23,7 @@ This project is the frontend for project-x-api
 
 ## Run on development environment
 
-### Run the api
+### Run the frontend
 
 ```
 make run
