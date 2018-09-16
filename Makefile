@@ -8,28 +8,37 @@ clean:
 	@rm -f .coverage
 	@rm -f coverage.xml
 
-  test: clean
+ test: clean
 	nosetests -s --rednose
 
-  coverage: clean
+ coverage: clean
 	nosetests --with-coverage --cover-package=pxf
 
-  requirements-dev:
+ requirements-dev:
 	pip install -r requirements-dev.txt
 
-  run:
+ run:
 	FLASK_ENV=development flask run --reload
 
-  lint: flake8 check-python-import
+ lint: flake8 check-python-import
 
-  flake8:
-	@flake8 --show-source .
+ flake8:
+	@flake8 --show-source --exclude migrations .
 
-  check-python-import:
-	@isort --check
+ check-python-import:
+	@isort --check  --skip migrations/
 
-  isort:
-	@isort
+ isort:
+	@isort --skip migrations/
 
-  outdated:
+ outdated:
 	pip list --outdated
+
+ db_migrate:
+	flask db migrate
+
+ db_upgrade:
+	flask db upgrade
+
+ db_downgrade:
+	flask db downgrade

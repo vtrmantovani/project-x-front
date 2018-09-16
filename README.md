@@ -7,6 +7,8 @@ This project is the frontend for project-x-api
 
 ## Dependencies
  - [Python 3.6](https://www.python.org/downloads/)
+ - [MySQL 5.7](https://www.mysql.com/downloads/)
+
  
 ## Install dependencies
 
