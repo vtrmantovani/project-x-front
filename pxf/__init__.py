@@ -2,6 +2,7 @@ import logging
 import os
 import sys
 from flask import Flask
+from flask_argon2 import Argon2
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
@@ -26,6 +27,9 @@ def create_app(config_var=os.getenv('DEPLOY_ENV', 'Development')):
 
     # configure logger
     configure_logger(app)
+
+    # configure argon2
+    app.argon2 = Argon2(app)
 
     # init database
     db.init_app(app)
