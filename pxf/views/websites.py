@@ -1,5 +1,5 @@
 import flask
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, redirect, request, url_for
 from flask_login import login_required
 
 from pxf.backends.website import WebsiteBackend
@@ -22,8 +22,11 @@ def create():
         if website_form.validate_on_submit():
             website_backend = WebsiteBackend()
             try:
+                flask.flash('Website cadastrado com sucesso!'
+                            ' Aguarde uns instantes que ele ira'
+                            ' aparecer na lista', 'success')
                 website_backend.create_website(website_form.data['url'])
-                return flask.render_template('website/list.html')
+                return redirect(url_for('websites.index'))
             except Exception as e:
                 flask.flash('Erro ao cadastrar url', 'error')
 
