@@ -1,0 +1,48 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: project-x-front
+  labels:
+    app: project-x-front
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: project-x-front
+    spec:
+      containers:
+      - name: project-x-front-app
+        image: registry.ng.bluemix.net/ibmprox/project-x-front:1.0.0
+        imagePullPolicy: Always
+        env:
+            - name: DEPLOY_ENV
+              value: DEPLOY_ENV
+            - name: SECRET_KEY
+              value: SECRET_KEY
+            - name: PXF_DB_URI
+              value: PXF_DB_URI
+            - name: PXA_URL
+              value: PXA_URL
+            - name: PXA_URL_API_KEY
+              value: PXA_URL_API_KEY
+            - name: PXA_TIMEOUT
+              value: PXA_TIMEOUT
+            - name: NEW_RELIC_LICENSE_KEY
+              value: NEW_RELIC_LICENSE_KEY
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: project-x-front
+  labels:
+    app: project-x-front
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: project-x-front

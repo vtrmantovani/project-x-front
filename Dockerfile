@@ -1,7 +1,7 @@
 FROM python:3.6.6-alpine AS builder
 MAINTAINER Vitor Mantovani <vtrmantovani@gmail.com>
 
-RUN apk add --no-cache --update bash git openssh mariadb-dev libffi-dev linux-headers alpine-sdk
+RUN apk add --no-cache --update bash git py-mysqldb openssh mariadb-dev libffi-dev linux-headers alpine-sdk
 
 RUN addgroup ibm && adduser -D -h /home/ibm -G ibm ibm
 
@@ -19,7 +19,7 @@ RUN cd /home/ibm && /home/ibm/.venv/bin/pip install -r requirements.txt
 
 FROM python:3.6.6-alpine
 
-RUN apk add --no-cache --update bash git openssh mariadb-dev libffi-dev linux-headers alpine-sdk
+RUN apk add --no-cache --update bash py-mysqldb git openssh mariadb-dev libffi-dev linux-headers alpine-sdk
 
 COPY --from=builder /home/ibm /home/ibm
 
