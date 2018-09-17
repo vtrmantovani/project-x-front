@@ -4,7 +4,18 @@
   <!-- sidebar menu: : style can be found in sidebar.less -->
   <ul class="sidebar-menu">
       <li class="header">MENU</li>
-      <li><a href="#"><i class="fa fa-users"></i> <span>Websites</span></a></li>
+      <li class="active treeview menu-open">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Websites</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+          <li {% if request.endpoint in ['websites.index'] %} class="active" {% endif %}"><a href="{{ url_for('websites.index') }}""><i class="fa fa-list"></i> <span>Listar</span></a></li>
+          <li {% if request.endpoint in ['websites.create'] %} class="active" {% endif %}"><a href="{{ url_for('websites.create') }}"><i class="fa fa-edit"></i> <span>Cadastrar</span></a></li>
+          </ul>
+      </li>
   </ul>
 </section>
 <!-- /.sidebar -->

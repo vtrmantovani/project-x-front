@@ -1,0 +1,35 @@
+{% extends "site/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block pageTitleContent %}
+    Cradastrar website
+{% endblock pageTitleContent %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+        <div id="system-alerts">
+            {% include "site/messages.html" %}
+        </div>
+          <div class="box">
+            <div class="box-body">
+                <form method="POST" role="form" action="{{ url_for('websites.create') }}">
+                    <div class="modal-body">
+                      {{ form.hidden_tag() }}
+                      {{ wtf.form_errors(form, hiddens="only") }}
+                      <div class="form-group has-feedback">
+                          {{ wtf.form_field(form.url) }}
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ url_for('websites.index') }}" class="btn btn-danger" data-dismiss="modal">Voltar</a>
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

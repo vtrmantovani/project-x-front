@@ -66,6 +66,8 @@ def create_app(config_var=os.getenv('DEPLOY_ENV', 'Development')):
     # register Blueprints
     from pxf.views.common import bp_common
     app.register_blueprint(bp_common)
+    from pxf.views.websites import bp_websites
+    app.register_blueprint(bp_websites)
     from pxf.views.site import bp_site, forbidden, internal_server_error, not_found  # noqa
     app.register_blueprint(bp_site)
     app.register_error_handler(Forbidden.code, forbidden)

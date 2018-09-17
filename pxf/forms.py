@@ -5,3 +5,7 @@ from wtforms import PasswordField, StringField, validators
 class LoginForm(FlaskForm):
     email = StringField('E-mail', validators=[validators.DataRequired(), validators.Email()])  # noqa
     password = PasswordField('Senha', validators=[validators.DataRequired(), validators.Length(min=6)]) # noqa
+
+
+class WebsiteForm(FlaskForm):
+    url = StringField('Website url', validators=[validators.DataRequired()])

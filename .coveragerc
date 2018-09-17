@@ -1,3 +1,5 @@
 [report]
 show_missing = True
-omit = pxf/views/site.py
+omit =
+    pxf/views/site.py
+    pxf/views/websites.py

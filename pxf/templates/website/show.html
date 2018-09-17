@@ -1,0 +1,55 @@
+{% extends "site/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block pageTitleContent %}
+    Vizualizar {{website.url}}
+{% endblock pageTitleContent %}
+
+{% block css %}
+    {{ super() }}
+	<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/obedtandadjaja/beautify-json/master/beautify-json.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-xs-12">
+          <div class="box">
+            <div class="box-body">
+              <div class="modal-body">
+                <div class="form-group has-feedback">
+                    <div class="form-group  required"><label class="control-label" for="name">Website</label>
+                    <input class="form-control"  value="{{website.website}}">
+                    </div>
+                    <div class="container">
+                        {{website|tojson}}
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="{{ url_for('websites.index') }}" class="btn btn-danger" data-dismiss="modal">Voltar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+{% block body_end_script %}
+    {{ super() }}
+    <script src="https://cdn.rawgit.com/obedtandadjaja/beautify-json/master/jquery.beautify-json.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.container').beautifyJSON({
+                hoverable: true,
+                collapsible: true,
+                color: true
+
+            });
+        });
+    </script>
+{% endblock body_end_script %}
