@@ -1,4 +1,4 @@
-Flask==1.0.2
+Flask==2.2.5
 Flask-Argon2==0.1.2.2
 Flask-Bootstrap==3.3.7.1
 Flask-SQLAlchemy==2.3.2
